@@ -51,4 +51,4 @@ steps:
     command: .buildkite/deploy.sh
     branches: production
     agents:
-      role: deploy-production
+      role: deploy
