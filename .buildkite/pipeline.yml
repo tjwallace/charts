@@ -1,6 +1,8 @@
 steps:
   - label: ":terminal: Lint Scripts"
     commands: make shellcheck
+    branches: "master"
 
   - label: ":helm: Lint Charts"
     commands: make lint
+    branches: "master"
