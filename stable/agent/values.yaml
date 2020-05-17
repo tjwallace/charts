@@ -62,6 +62,9 @@ registryCreds:
   # to be used with imagePullSecrets
   dockerconfigjson: ""
 
+serviceAccount:
+  annotations: {}
+
  # Uncomment below to enable docker socket liveness probe
 livenessProbe:
   # initialDelaySeconds: 15
