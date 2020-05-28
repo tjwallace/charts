@@ -49,6 +49,13 @@ volumes: {}
 # Your ssh private key if you want to access private git repository
 privateSshKey: ""
 
+# Your ssh private keys if you want to access several private git repositories
+# name will be visible on the Secret to track which keys have been added
+# key has to be encoded in base64
+privateSshKeys:
+#  - name: "id_rsa_jeff"
+#    base64Key: "private_key_encoded"
+
 # Docker registries credentials
 registryCreds:
   # GCP credentials for GCR
