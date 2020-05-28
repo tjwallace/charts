@@ -81,6 +81,10 @@ spec:
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
+            {{- if .Values.privateSshKeys }}
+            - name: ssh-keys
+              mountPath: /root/ssh_keys
+            {{- end }}
 {{- if .Values.volumeMounts }}{{ toYaml .Values.volumeMounts | nindent 12 }}{{- end }}
 {{- if .Values.enableHostDocker }}
             - name: var-run-docker-sock
@@ -119,6 +123,17 @@ spec:
 {{- if .Values.podContainers }}{{ toYaml .Values.podContainers | nindent 8 }}{{- end }}
       volumes:
 {{- if .Values.volumes }}{{ toYaml .Values.volumes | nindent 8 }}{{- end }}
+{{- if .Values.privateSshKeys }}
+        - name: ssh-keys
+          secret:
+            secretName: {{ template "fullname" . }}
+            items:
+            {{- range .Values.privateSshKeys }}
+              - key: {{ .name }}
+                path: {{ .name }}
+                mode: 0600
+            {{- end }}
+{{- end }}
 {{- if .Values.enableHostDocker }}
         - name: var-run-docker-sock
           hostPath:
